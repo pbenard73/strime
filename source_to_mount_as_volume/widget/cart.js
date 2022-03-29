@@ -27,7 +27,7 @@ class CartManager {
     }
 
     removeItem(req, product, quantity) {
-        const items = [...req.session.cart.items]
+        let items = [...req.session.cart.items]
 
         const exists = items.find(i => i.productId === product.id) || null
 
