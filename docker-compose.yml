@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  strime:
+    container_name: strim_node
+    image: strim_node:latest
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+      - 3001:3001
+      - 3002:3002
+      - 3003:3003
+      - 3004:3004
+      - 3005:3005
+      - 3100:3100
+    volumes:
+      - /home/patrick/Workpro/strime:/strime
+    links:
+      - "postgres:database"
+      - "redis: redis"
+  postgres:
+    container_name: strime_postgres
+    image: postgis/postgis:12-master
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    volumes:
+      - /home/patrick/Workpro/strime:/strime
+    environment:
+      POSTGRES_PASSWORD: admin
+  redis:
+    container_name: strime_redis
+    image: redis:6.2.1
+    restart: unless-stopped
+    ports:
+      - 6380:6379
+    links:
+      - "postgres:database"
+  pgadmin:
+    container_name: strimepgadmin
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    ports:
+      - 4000:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=test@strime.fr
+      - PGADMIN_DEFAULT_PASSWORD=test        
+    links:
+      - "postgres:database"

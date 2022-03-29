@@ -1,0 +1,18 @@
+1 - inside strim_node folder
+    docker build --no-cache --pull -t strim_node . 
+    
+2 - at root
+    modify the docker-compose volume entry to target the source
+    docker-compose up
+
+	
+4 - browser localhost:4000 test@strime.fr:test
+	create strime database at server {host: 'postgres', username:'postgres'}
+4.5 - create some product : (time too short to dump)
+	
+5 - Log into strim_node container
+	cd strime
+	npm install
+	node bin/www
+	
+Browser : http://localhost:3000/apidoc to get the Api doc
